@@ -74,7 +74,6 @@ gulp.task('sass', require('./gulp-tasks/build-process/scss')(gulp, plugins, conf
 /*=====================================================================
  MOVE FOLDERS
  ======================================================================*/
-gulp.task('content', require('./gulp-tasks/build-process/content')(gulp, plugins, config));
 gulp.task('other:assets', require('./gulp-tasks/build-process/otherAssets')(gulp, plugins, config));
 /*=====================================================================
  CLEAN TASKS
@@ -86,14 +85,15 @@ gulp.task('clean:release', function(cb){
     del([config.basepath.release], cb);
 });
 /*=====================================================================
+ TEMPLATE TASKS
+ ======================================================================*/
+ gulp.task('template', require('./gulp-tasks/build-process/template.js')(gulp, plugins, config));
+/*=====================================================================
  WATCH TASKS
  ======================================================================*/
 gulp.task('watch', function() {
     gulp.watch(config.basepath.src+'/**/*.js', ['js']);
     gulp.watch(config.basepath.src+'/**/*.scss', ['sass']);
-    gulp.watch([config.basepath.src+'**/*',
-        '!'+config.basepath.src+'{assets,assets/**}'
-    ], ['content']);
     gulp.watch([config.basepath.src+'*',config.basepath.src+'*'+'*',config.basepath.src+'*'+'*'], ['other:assets']);
 });
 /*=====================================================================
@@ -104,6 +104,6 @@ gulp.task('release:content', require('./gulp-tasks/release-process/content')(gul
 /*=====================================================================
  TASK RUNNERS
  ======================================================================*/
-gulp.task('default',['content','js','sass', 'other:assets']);
+gulp.task('default',['js','sass', 'other:assets', 'template']);
 gulp.task('build',['default']);
 gulp.task('release',['release:assets', 'release:content']);
