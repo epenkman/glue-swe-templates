@@ -1,12 +1,15 @@
 {
-  "name": "charts",
+  "name": "glue-swe-templates-test",
   "version": "1.0.0",
-  "version-name": "modular-benefit",
-  "description": "Queensland Government ",
+  "version-name": "",
+  "description": "Queensland Government SWE templates",
   "main": "gulpfile.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/qld-gov-au/module-basic.git"
+  },
+  "scripts": {
+    "prepublish": "node_modules/.bin/gulp build"
   },
   "authors": "Queensland Government",
   "licence": "all rights reserved",
